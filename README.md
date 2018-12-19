@@ -25,6 +25,6 @@ Two example datasets are also included in the google drive for use in the softwa
 
 'Atria.tif' - Isolated mouse left atria, paced at 3 and 6.25Hz and loaded with voltage sensitive dye. Sampling rate =0.987kHz, pixel size = 71.4micrometers
 
-'GP.tif' - Guinea Pig whole heart paced at 5Hzampling rate =0.5kHz, pixel size = 320micrometers
+'GP.tif' - Guinea Pig whole heart paced at 5Hz. Sampling rate =0.5kHz, pixel size = 320micrometers
 
 For any questions, please contact CXO531@bham.ac.uk
