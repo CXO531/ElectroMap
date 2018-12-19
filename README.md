@@ -16,6 +16,7 @@ Open and run 'ElectroMap.m'
 Installer for standalone versions of the software can be found at https://drive.google.com/open?id=1nJyI07w9WIt5zWcit0aEyIbtg31tANxI. Installation will require internet connection to download MATLAB runtime, and are called -
 
 ElectroMapInstaller_web.exe (Windows)
+
 (MAC)
 
 Alternatively, the MATLAB runtime can be separately downloaded from https://uk.mathworks.com/products/compiler/matlab-runtime.html. Version 9.4 is required for use of ElectroMap. Further detailed instructions are included in the readme.txt file on the google drive.
