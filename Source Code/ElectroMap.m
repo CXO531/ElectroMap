@@ -166,18 +166,18 @@ for i=1:length(allfiles)
 k = strfind(allfiles(i).name, '.TIF');
 d = strfind(allfiles(i).name, '.tif');
 m = strfind(allfiles(i).name, '.mat');
-l = isfolder(allfiles(i).name);
-if isempty(k) ~= 1 && l ~= 1
+%l = isfolder(allfiles(i).name);
+if isempty(k) ~= 1 && %l ~= 1
 count=count+1;
 file=allfiles(i).name;
 file_list{count}=file;
 end
-if isempty(d) ~= 1 && l ~= 1
+if isempty(d) ~= 1 && %l ~= 1
 count=count+1;
 file=allfiles(i).name;
 file_list{count}=file;
 end
-if isempty(m) ~= 1 && l ~= 1
+if isempty(m) ~= 1 && %l ~= 1
 count=count+1;
 file=allfiles(i).name;
 file_list{count}=file;
