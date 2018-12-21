@@ -4,11 +4,12 @@ ElectroMap - optical and electrophysiological mapping software.
 
 The software is available as 
 
-[1] MATLAB source code. To run this version, MATLAB is required along with the Image Processing, Signal Processing, Statistics and Machine Learning and the Curve Fitting toolbox. Recommended for use with MATLAB 2018a or later. Previous MATLAB releases have not been fully tested, altough can be used to run the software. 
+[1] MATLAB source code. To run this version, MATLAB is required along with the Image Processing, Signal Processing, Statistics and Machine Learning and the Curve Fitting toolbox. Recommended for use with MATLAB 2016b or later. Previous MATLAB releases have not been fully tested, altough can be used to run the software. 
 
 To run the software -
 
 Download/clone ALL files in 'Source Code' folder.
+Unzip files
 Open and run 'ElectroMap.m'
 
 [2] Standalone .exe (windows) or .dmg (MAC) applications
