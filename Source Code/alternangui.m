@@ -716,41 +716,41 @@ if get(handles.Tracesource,'Value') == 1
         hx2 = plot([(handles.locs(pp+1)+handles.after) (handles.locs(pp+1)+handles.after)], ylim, 'Color', 'k');
     end
     
+%     if traceopt == 2
+%         axes(handles.trace)
+%         cla reset
+%         yyaxis right
+%         plot(handles.av_normsig,'k');
+%         hold on
+%         plot(handles.av_t_pixamp,handles.av_pixamp,'ob');
+%         plot(handles.av_t_pixload,handles.av_pixload,'xb');
+%         yyaxis left
+%         plot(handles.av_t_pixamp(2:end),handles.av_amp_map,'rx');
+%         plot(handles.av_t_pixamp(2:end),handles.av_load_map,'ro');
+%         hx = plot([(handles.locs(pp+1)-handles.before) (handles.locs(pp+1)-handles.before)], ylim, 'Color', 'k');
+%         hx2 = plot([(handles.locs(pp+1)+handles.after) (handles.locs(pp+1)+handles.after)], ylim, 'Color', 'k');
+%     end
+%     
+%     if traceopt == 3
+%         axes(handles.trace)
+%         cla reset
+%         yyaxis right
+%         plot(handles.av_normsig,'k');
+%         ax=gca; ax.YColor='k'
+%         xlabel('Time (ms)')
+%         ylabel('Normalised Fluorescence')
+%         yyaxis left
+%         plot(handles.av_t_pixamp,handles.av_pixapd,'xb-');
+%         hold on
+%         plot(handles.av_t_pixamp(2:end),handles.av_apd_map,'rx-');
+%         ylabel('APD/APD Alternan (ms)')
+%         ax=gca; ax.YColor= 'r';
+%         hx = plot([(handles.locs(pp+1)-handles.before) (handles.locs(pp+1)-handles.before)], ylim, 'Color', 'k');
+%         hx2 = plot([(handles.locs(pp+1)+handles.after) (handles.locs(pp+1)+handles.after)], ylim, 'Color', 'k');
+%     end
+%     
+    
     if traceopt == 2
-        axes(handles.trace)
-        cla reset
-        yyaxis right
-        plot(handles.av_normsig,'k');
-        hold on
-        plot(handles.av_t_pixamp,handles.av_pixamp,'ob');
-        plot(handles.av_t_pixload,handles.av_pixload,'xb');
-        yyaxis left
-        plot(handles.av_t_pixamp(2:end),handles.av_amp_map,'rx');
-        plot(handles.av_t_pixamp(2:end),handles.av_load_map,'ro');
-        hx = plot([(handles.locs(pp+1)-handles.before) (handles.locs(pp+1)-handles.before)], ylim, 'Color', 'k');
-        hx2 = plot([(handles.locs(pp+1)+handles.after) (handles.locs(pp+1)+handles.after)], ylim, 'Color', 'k');
-    end
-    
-    if traceopt == 3
-        axes(handles.trace)
-        cla reset
-        yyaxis right
-        plot(handles.av_normsig,'k');
-        ax=gca; ax.YColor='k'
-        xlabel('Time (ms)')
-        ylabel('Normalised Fluorescence')
-        yyaxis left
-        plot(handles.av_t_pixamp,handles.av_pixapd,'xb-');
-        hold on
-        plot(handles.av_t_pixamp(2:end),handles.av_apd_map,'rx-');
-        ylabel('APD/APD Alternan (ms)')
-        ax=gca; ax.YColor= 'r';
-        hx = plot([(handles.locs(pp+1)-handles.before) (handles.locs(pp+1)-handles.before)], ylim, 'Color', 'k');
-        hx2 = plot([(handles.locs(pp+1)+handles.after) (handles.locs(pp+1)+handles.after)], ylim, 'Color', 'k');
-    end
-    
-    
-    if traceopt == 4
         axes(handles.trace)
         cla reset
         plot(handles.av_normsig,'k');
@@ -827,39 +827,39 @@ if get(handles.Tracesource,'Value') == 2 && handles.isZoomed == 0;
         plot(squeeze(handles.t_pixamp(handles.row,handles.col,:)),squeeze(handles.pixamp(handles.row,handles.col,:)),'ob');
         plot(squeeze(handles.t_pixload(handles.row,handles.col,:)),squeeze(handles.pixload(handles.row,handles.col,:)),'xb');
     end
+%     
+%     if traceopt == 2
+%         axes(handles.trace)
+%         cla reset
+%         yyaxis right
+%         plot(squeeze(handles.normsig(handles.row,handles.col,:)),'k');
+%         hold on
+%         plot(squeeze(handles.t_pixamp(handles.row,handles.col,:)),squeeze(handles.pixamp(handles.row,handles.col,:)),'ob');
+%         plot(squeeze(handles.t_pixload(handles.row,handles.col,:)),squeeze(handles.pixload(handles.row,handles.col,:)),'xb');
+%         yyaxis left
+%         plot(squeeze(handles.t_pixamp(handles.row,handles.col,2:end)),squeeze(handles.amp_map(handles.row,handles.col,:)),'rx');
+%         plot(squeeze(handles.t_pixamp(handles.row,handles.col,2:end)),squeeze(handles.load_map(handles.row,handles.col,:)),'ro');
+%         
+%     end
+%     
+%     if traceopt == 3
+%         axes(handles.trace)
+%         cla reset
+%         yyaxis right
+%         plot(squeeze(handles.normsig(handles.row,handles.col,:)),'k');
+%         ax=gca; ax.YColor='k'
+%         xlabel('Time (ms)')
+%         ylabel('Normalised Fluorescence')
+%         yyaxis left
+%         plot(squeeze(handles.t_pixamp(handles.row,handles.col,:)),squeeze(handles.pixapd(handles.row,handles.col,:)),'xb-');
+%         hold on
+%         plot(squeeze(handles.t_pixamp(handles.row,handles.col,2:end)),squeeze(handles.apd_map(handles.row,handles.col,:)),'rx-');
+%         ylabel('APD/APD Alternan (ms)')
+%         ax=gca; ax.YColor= 'r';
+%     end
+%     
     
     if traceopt == 2
-        axes(handles.trace)
-        cla reset
-        yyaxis right
-        plot(squeeze(handles.normsig(handles.row,handles.col,:)),'k');
-        hold on
-        plot(squeeze(handles.t_pixamp(handles.row,handles.col,:)),squeeze(handles.pixamp(handles.row,handles.col,:)),'ob');
-        plot(squeeze(handles.t_pixload(handles.row,handles.col,:)),squeeze(handles.pixload(handles.row,handles.col,:)),'xb');
-        yyaxis left
-        plot(squeeze(handles.t_pixamp(handles.row,handles.col,2:end)),squeeze(handles.amp_map(handles.row,handles.col,:)),'rx');
-        plot(squeeze(handles.t_pixamp(handles.row,handles.col,2:end)),squeeze(handles.load_map(handles.row,handles.col,:)),'ro');
-        
-    end
-    
-    if traceopt == 3
-        axes(handles.trace)
-        cla reset
-        yyaxis right
-        plot(squeeze(handles.normsig(handles.row,handles.col,:)),'k');
-        ax=gca; ax.YColor='k'
-        xlabel('Time (ms)')
-        ylabel('Normalised Fluorescence')
-        yyaxis left
-        plot(squeeze(handles.t_pixamp(handles.row,handles.col,:)),squeeze(handles.pixapd(handles.row,handles.col,:)),'xb-');
-        hold on
-        plot(squeeze(handles.t_pixamp(handles.row,handles.col,2:end)),squeeze(handles.apd_map(handles.row,handles.col,:)),'rx-');
-        ylabel('APD/APD Alternan (ms)')
-        ax=gca; ax.YColor= 'r';
-    end
-    
-    
-    if traceopt == 4
         axes(handles.trace)
         cla reset
         plot(norms,'k');
@@ -919,7 +919,7 @@ if get(handles.Tracesource,'Value') == 3
         imshow(handles.images(:,:,1), [],'InitialMagnification', 800)
         title('Select ROI and press enter');
         handles.BWpoly = [];
-        handles.BWpoly=uint32(roipoly);
+        handles.BWpoly=double(roipoly);
         polyfig=gcf;
         close(polyfig);
         
@@ -1296,15 +1296,15 @@ switch cho
         %colormap('jet');
         %hcb.Label.String=' Average Amplitude Alternan (%)';
         
-        for i =1:handles.rows
-            for j=1:handles.cols
-                length(handles.apd_map(1,1,:))
-                b=handles.apd_map(i,j,a1:a2);
-                B(i,j)=nanmean(b(b~=0));
-            end
-        end
-        figure,
-        imshow(B, [0 10],'ColorMap',ddd,'InitialMagnification', 1600);
+%         for i =1:handles.rows
+%             for j=1:handles.cols
+%                 length(handles.apd_map(1,1,:))
+%                 b=handles.apd_map(i,j,a1:a2);
+%                 B(i,j)=nanmean(b(b~=0));
+%             end
+%         end
+%         %figure,
+        %imshow(B, [0 10],'ColorMap',ddd,'InitialMagnification', 1600);
         
         %amp and load maps
         
@@ -1381,8 +1381,10 @@ switch cho
         end
         A=medfilt2(A);
         figure,
-        imshow(A, [-0.05 .3],'ColorMap',ddd,'InitialMagnification', 1600);
+        imshow(A, [-0.05 .3],'ColorMap',ddd,'InitialMagnification', 1600);      
 end
+
+msgbox('To change scales - select edit>colormap')
 
 
 

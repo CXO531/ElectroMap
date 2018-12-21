@@ -674,10 +674,10 @@ drawnow()
 
 %% DETECT PEAKS
 before=str2double(get(handles.beforeGUI,'String'));
-before=before/str2double(get(handles.framerate,'String'));
+before=before*str2double(get(handles.framerate,'String'));
 before=round(before);
 after=str2double(get(handles.afterGUI,'String'));
-after=after/str2double(get(handles.framerate,'String'));
+after=after*str2double(get(handles.framerate,'String'));
 after=round(after);
 handles.locs=[];handles.q2locs=[];handles.avgCL=[];
 [handles.locs,~,handles.q2locs,handles.avgCL,handles.numofpeaksoverall,handles.peakheight]=Omseg2...
@@ -1051,6 +1051,7 @@ set(gca, 'XColor', 'none', 'yColor', 'none', 'xtick', [], 'ytick', [], 'Color', 
 end
 caxis([str2double(get(handles.cmin,'String')) str2double(get(handles.cmax,'String'))])
 end
+title('SNR Map')
 freezeColors
 % colorbar
 axes(handles.cb);
@@ -1064,8 +1065,6 @@ cpos(4) = 4*cpos(4);
 hcb.Position = cpos;
 hcb.TicksMode='manual';hcb.TickLabelsMode='manual';
 if get(handles.apdscale,'Value') == 1
-max(max(alll))
-min(min(alll))
 stepp=(ceil(max(max(alll)))-floor(min(min(alll))))/5;
 hcb.TickLabels=(floor(min(min(alll))):stepp:ceil(max(max(alll))));
 hcb.Ticks=[0.01,0.2:0.2:1];
@@ -1139,8 +1138,6 @@ cpos(4) = 4*cpos(4);
 hcb.Position = cpos;
 hcb.TicksMode='manual';hcb.TickLabelsMode='manual';
 if get(handles.apdscale,'Value') == 1
-max(max(alll))
-min(min(alll))
 stepp=(ceil(max(max(alll)))-floor(min(min(alll))))/5;
 hcb.TickLabels=[floor(min(min(alll))):stepp:ceil(max(max(alll)))];
 hcb.Ticks=[0.01,0.2:0.2:1];
@@ -1538,6 +1535,7 @@ set(gca, 'XColor', 'none', 'yColor', 'none', 'xtick', [], 'ytick', [], 'Color', 
 end
 caxis([str2double(get(handles.cmin,'String')) str2double(get(handles.cmax,'String'))])
 end
+title('Time to peak Map');
 freezeColors
 % colorbar
 axes(handles.cb);

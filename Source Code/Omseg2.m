@@ -21,8 +21,8 @@ maxfluo=max(signal);
 newpeakheight=maxfluo*peakheight;
 
 %make start up to before and end up to after zero so no peaks can be found here
-signal(1:before)=zeros(1,before);
-signal(end-after+1:end)=zeros(1,after);
+signal(1:before)=ones(1,before)*signal(before+1);
+signal(end-after+1:end)=ones(1,after)*signal(end-after);
 
 [pks, locs] = findpeaks(signal, 'MINPEAKHEIGHT',newpeakheight, 'MINPEAKDISTANCE', peakdist);
 remove1=0;
@@ -198,9 +198,9 @@ if segchoice == 2 || segchoice == 3
     end
     if length((q2locs(1,:))) == 1 %%only one peak
         q=1;
-        for i=1:length(CL(:,1));
+        for i=1:length(CL(:,1))
             if q < length(q2locs)
-                if CL(i,1) == q2locs(q); %%check this peak in settings
+                if CL(i,1) == q2locs(q) %%check this peak in settings
                     avgCL(2,q) = CL(i,2);
                     q=q+1;
                 end
