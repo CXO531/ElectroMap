@@ -1,4 +1,16 @@
 Windows and Mac standalone executable files can be found at
 https://drive.google.com/open?id=1nJyI07w9WIt5zWcit0aEyIbtg31tANxI
 alongside example datasets.
-   
+
+Two example voltage dye loaded datasets are provided -
+
+'atria.tif' - mouse left atria paced at 3Hz and 6.25Hz
+'GP.tif' - guinea pig whole heart paced at 5.25Hz
+
+Default settings on starting software are optimised for processing the atria dataset. A configuration file (.txt) is provided for both datasets that can be used to upload optimal setting for the dataset.
+These are - 
+
+'Atria settings.txt'
+'Gp Settings.txt'
+
+To load these files, select 'Configuration File' > 'Load Settings'
