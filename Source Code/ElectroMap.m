@@ -1155,6 +1155,7 @@ pos = get(hcb,'Position');
 hcb.Label.Position=[pos(1) pos(2)-1.2];
 stdall=std(alll);
 palll=prctile(alll,[5,50,95]);
+
 handles.rdata(1,1)=mean(alll);handles.rdata(1,2)=stdall;handles.rdata(1,3)=stdall/sqrt(numel(alll));handles.rdata(1,4)=stdall*stdall;handles.rdata(1,5)=((palll(3)-palll(1))/palll(2));
 
 [~,~,allSNRr,allSNRdb]=snrs(handles.averageBeat,handles.mask,handles.snrt1,handles.snrt2,(get(handles.tfilt,'Value')));
@@ -1695,8 +1696,9 @@ end
 %    handles.mask=handles.hold_mask; %keep and reinsate overall mask at end
 handles.holdmap=map;
 handles.holdcvmap=CVmap;
-guidata(hObject, handles);
 drawnow()
+guidata(hObject, handles);
+
 
 % Hints: contents = cellstr(get(hObject,'String')) returns apdvaluechoice contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from apdvaluechoice
@@ -1932,7 +1934,8 @@ handles.outlier=get(handles.apdout,'Value');
 handles.outliervel=get(handles.velout,'Value');
 wb=waitbar(0.4,'Calculating APD');
 t=str2double(get(handles.t,'String'));
-[apmap,meanapd,alll,onedev]=mapsbaby(get(handles.aptime1,'Value'),str2double(get(handles.framerate,'String')),t,handles.I,handles.images,handles.averageBeat,handles.outlier,str2double(get(handles.cmin,'String')),str2double(get(handles.cmax,'String')),get(handles.tfilt,'Value'),str2double(get(handles.beforeGUI,'String')),get(handles.apdbl,'Value'),str2double(get(handles.apdblnum,'String')));
+                            
+[apmap,meanapd,alll,onedev]=mapsbaby(get(handles.aptime1,'Value'),str2double(get(handles.framerate,'String')),t,handles.I,handles.images,handles.averageBeat,handles.outlier,str2double(get(handles.cmin,'String')),str2double(get(handles.cmax,'String')),get(handles.tfilt,'Value'),str2double(get(handles.beforeGUI,'String')),get(handles.apdbl,'Value'),str2double(get(handles.apdblnum,'String')),handles.medifilt);
 stdall=std(alll);
 palll=prctile(alll,[5,50,95]);
 handles.rdata(4,1)=mean(alll);handles.rdata(4,2)=stdall;handles.rdata(4,3)=stdall/sqrt(numel(alll));handles.rdata(4,4)=stdall*stdall;handles.rdata(4,5)=((palll(3)-palll(1))/palll(2));
@@ -2057,8 +2060,10 @@ wb=waitbar(0.1,'Preparing Images');
 section_choice=get(handles.listbox2,'Value');
 end
 
+handles.filming
 if handles.filming == 1
 section_choice=handles.filmcount;
+section_choice
 end
 if strcmp(handles.section{section_choice},'Zoomed Section') == 1 && handles.filming ~= 1
 sig=handles.averages(handles.q2locs(section_choice,1):handles.q2locs(section_choice,2));
@@ -2165,7 +2170,8 @@ handles.outlier=get(handles.apdout,'Value');
 if handles.filming == 0
 waitbar(0.4,wb,'Producing APD map');
 t=str2double(get(handles.t,'String'));
-[apmap,meanapd,~,onedev,var,SE]=mapsbaby(get(handles.aptime1,'Value'),str2double(get(handles.framerate,'String')),t,handles.I,handles.images,handles.averageBeat,handles.outlier,str2double(get(handles.cmin,'String')),str2double(get(handles.cmax,'String')),get(handles.tfilt,'Value'),str2double(get(handles.beforeGUI,'String')),get(handles.apdbl,'Value'),str2double(get(handles.apdblnum,'String')),handles.medifilt);
+                               
+[apmap,meanapd,alll,onedev,var,SE]=mapsbaby(get(handles.aptime1,'Value'),str2double(get(handles.framerate,'String')),t,handles.I,handles.images,handles.averageBeat,handles.outlier,str2double(get(handles.cmin,'String')),str2double(get(handles.cmax,'String')),get(handles.tfilt,'Value'),str2double(get(handles.beforeGUI,'String')),get(handles.apdbl,'Value'),str2double(get(handles.apdblnum,'String')),handles.medifilt);
 
 waitbar(0.6,wb,'Producing Isochronal map');
 
@@ -2179,7 +2185,6 @@ if get(handles.actfittimes,'Value') == 2
 cvmap(str2double(get(handles.pixelsize,'String')),str2double(get(handles.framerate,'String')),handles.cvimages,handles.mask,get(handles.velout,'Value'),str2double(get(handles.minvel,'String')),str2double(get(handles.maxvel,'String')),get(handles.velalgo,'Value'),...
 str2double(get(handles.MINt,'String')),str2double(get(handles.MAXt,'String')),str2double(get(handles.winsize,'String')),str2double(get(handles.beforeGUI,'String')),str2double(get(handles.wint,'String')),0,str2double(get(handles.t,'String')),get(handles.tfilt,'Value'),get(handles.usespline,'Value'),str2double(get(handles.splineN,'String')));
 end
-alll=apmap(apmap>0);
 APp=prctile(alll,[5,50,95]);
 CVp=prctile(vout,[5,50,95]);
 handles.err=[onedev,SE,var,((APp(3)-APp(1))/APp(2))];
@@ -2202,7 +2207,7 @@ rdata(3,5)=((sp(3)-sp(1))/sp(2));
 rdata(rdata==0)=NaN;
 handles.rdata=rdata;
 set(handles.rtable,'Data',rdata);
-
+disp('2218')
 %save AP,CV maps and vectors
 handles.apdmap=apmap;
 handles.apalll=alll;
@@ -2594,15 +2599,15 @@ open(vidobj);
 set(gca,'nextplot','replacechildren');
 handles.filming = 1;
 wb=waitbar(0.1,'Producing video file','WindowStyle', 'modal');
-for i=1:numsec
-handles.filmcount = i;
-guidata(hObject, handles);
-Mapchoice_Callback(hObject, eventdata, handles);
+for k=1:numsec
+handles.filmcount = k;
+producemaps_Callback(hObject, eventdata, handles)
 handles = guidata(hObject);
 axes(handles.mapaxes);
 currFrame = getframe;
 writeVideo(vidobj,currFrame);
-waitbar((0.1+0.9*(i/numsec)),wb,'Producing video file');
+0.1+0.9*(k/numsec)
+waitbar((0.1+0.9*(k/numsec)),wb);
 end
 close(vidobj);
 delete(wb)
@@ -2630,7 +2635,7 @@ set(gca,'OuterPosition',[i/numsec-0.2 i/numsec-0.2 i/numsec i/numsec])
 %set(gca,'position',[0.1300 0.1100 0.7750 0.8150])
 guidata(hObject, handles);
 end
-handles.filming==0
+handles.filming=0
 end
 
 
@@ -2752,7 +2757,7 @@ rdata(2,1)=mean(vout);rdata(2,2)=handles.errCV(1);rdata(2,3)=handles.errCV(2);rd
 
 handles.rdata=rdata;
 set(handles.rtable,'Data',rdata);
-
+disp('2768')
 %save CV maps and vectors
 
 handles.actmap=actmap;
@@ -2960,6 +2965,7 @@ rdata=handles.rdata;
 rdata(1,1)=meanapd;rdata(1,2)=handles.err(1);rdata(1,3)=handles.err(2);rdata(1,4)=handles.err(3);rdata(1,5)=handles.err(4);
 guidata(hObject,handles)
 set(handles.rtable,'Data',rdata);
+disp('2977')
 mapcho=get(handles.Mapchoice,'Value');
 if mapcho == 1
 Mapchoice_Callback(hObject, eventdata, handles);
@@ -3523,7 +3529,7 @@ pushprocess_Callback(hObject, eventdata, handles)
 handles = guidata(hObject); 
 handles.herefromsegmentpush = 0;
 guidata(hObject, handles);
-Mapchoice_Callback(hObject, eventdata, handles)
+producemaps_Callback(hObject, eventdata, handles)
 handles = guidata(hObject); 
 guidata(hObject, handles);
 
@@ -3538,7 +3544,7 @@ pushprocess_Callback(hObject, eventdata, handles)
 handles = guidata(hObject); 
 handles.herefromsegmentpush = 0;
 guidata(hObject, handles);
-Mapchoice_Callback(hObject, eventdata, handles)
+producemaps_Callback(hObject, eventdata, handles)
 handles = guidata(hObject); 
 guidata(hObject, handles);
 
@@ -3862,6 +3868,6 @@ prompt = {'Frames before pulse to remove:','Frames after pulse to remove:'};
 dims = [1 35];
 definput = {num2str(handles.pbefore),num2str(handles.pafter)};
 answer = inputdlg(prompt,'Contour Setting',dims,definput);
-handles.pbefore=answer{1};
-handles.pbafter=answer{2};
+handles.pbefore=str2double(answer{1});
+handles.pafter=str2double(answer{2});
 guidata(hObject, handles);
