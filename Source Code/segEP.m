@@ -75,8 +75,8 @@ g1data = guidata(h);
 axes(handles.axes1);
 wb=waitbar(0.5,'Transfering Activation Map');
 [handles.amap,~,~,handles.act_t,~,~,~,~,~,~,handles.vout,handles.quivers_Xout,handles.quivers_Yout,handles.quivers_vxout,handles.quivers_vyout]...
-    =cvmap(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),g1data.cvimages,g1data.mask,1,str2double(get(g1data.minvel,'String')),str2double(get(g1data.maxvel,'String')),get(g1data.velalgo,'Value'),...
-    str2double(get(g1data.MINt,'String')),str2double(get(g1data.MAXt,'String')),str2double(get(g1data.winsize,'String')),str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.wint,'String')),0,str2double(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String'))); 
+    =cvmap(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),g1data.cvimages,g1data.mask,1,str2num(get(g1data.minvel,'String')),str2num(get(g1data.maxvel,'String')),get(g1data.velalgo,'Value'),...
+    str2num(get(g1data.MINt,'String')),str2num(get(g1data.MAXt,'String')),str2num(get(g1data.winsize,'String')),str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.wint,'String')),0,str2num(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String'))); 
 delete(wb)
 jetcolormap = (colormap('jet'));
 jetcolormap(1,:) = [1, 1, 1];
@@ -86,8 +86,8 @@ if get(g1data.isoopt,'Value') == 1
 mini=0;
 maxi=max(max(amap));
 elseif get(g1data.isoopt,'Value') == 2
-mini=str2double(get(g1data.isomin,'String'));
-maxi=str2double(get(g1data.isomax,'String'));
+mini=str2num(get(g1data.isomin,'String'));
+maxi=str2num(get(g1data.isomax,'String'));
 end
 imshow(amap, [0 maxi], 'InitialMagnification', 800,'colormap',jetcolormap),
 caxis([mini maxi]);
@@ -148,7 +148,7 @@ function APDs_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of APDs as text
-%        str2double(get(hObject,'String')) returns contents of APDs as a double
+%        str2num(get(hObject,'String')) returns contents of APDs as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -186,8 +186,8 @@ if get(g1data.isoopt,'Value') == 1
 mini=0;
 maxi=max(max(amap));
 elseif get(g1data.isoopt,'Value') == 2
-mini=str2double(get(g1data.isomin,'String'));
-maxi=str2double(get(g1data.isomax,'String'));
+mini=str2num(get(g1data.isomin,'String'));
+maxi=str2num(get(g1data.isomax,'String'));
 end
 imshow(amap, [0 maxi], 'InitialMagnification', 800,'colormap',jetcolormap),
 caxis([mini maxi]);
@@ -290,7 +290,7 @@ function winsize_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of winsize as text
-%        str2double(get(hObject,'String')) returns contents of winsize as a double
+%        str2num(get(hObject,'String')) returns contents of winsize as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -313,7 +313,7 @@ function binsize_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of binsize as text
-%        str2double(get(hObject,'String')) returns contents of binsize as a double
+%        str2num(get(hObject,'String')) returns contents of binsize as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -336,7 +336,7 @@ function veldistance_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of veldistance as text
-%        str2double(get(hObject,'String')) returns contents of veldistance as a double
+%        str2num(get(hObject,'String')) returns contents of veldistance as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -359,7 +359,7 @@ function minvel_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of minvel as text
-%        str2double(get(hObject,'String')) returns contents of minvel as a double
+%        str2num(get(hObject,'String')) returns contents of minvel as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -382,7 +382,7 @@ function maxvel_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of maxvel as text
-%        str2double(get(hObject,'String')) returns contents of maxvel as a double
+%        str2num(get(hObject,'String')) returns contents of maxvel as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -405,7 +405,7 @@ function mint_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of mint as text
-%        str2double(get(hObject,'String')) returns contents of mint as a double
+%        str2num(get(hObject,'String')) returns contents of mint as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -428,7 +428,7 @@ function maxt_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of maxt as text
-%        str2double(get(hObject,'String')) returns contents of maxt as a double
+%        str2num(get(hObject,'String')) returns contents of maxt as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -451,7 +451,7 @@ function actims_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of actims as text
-%        str2double(get(hObject,'String')) returns contents of actims as a double
+%        str2num(get(hObject,'String')) returns contents of actims as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -483,13 +483,13 @@ if saveopt == 4 || saveopt == 5
 [filename,pathname] = uiputfile({'*.mat'},'Hi');
 end
 % analysis options 
-opt1=get(handles.apdopt,'Value');opt2=get(handles.Tauopt,'Value');opt3=0;;opt4=get(handles.ttpopt,'Value');opt5=get(handles.maxuopt,'Value');
+opt1=get(handles.apdopt,'Value');opt2=get(handles.Tauopt,'Value');opt3=0;opt4=get(handles.ttpopt,'Value');opt5=get(handles.maxuopt,'Value');
 
 [~,~,ext] = fileparts(filename);
 file=[pathname,filename];
 numsec=length(g1data.section);
 %values from segEP GUI
-    ts=str2double(get(handles.APDs,'String'));
+    ts=str2num(get(handles.APDs,'String'));
     apdnames=cell(numel(ts)-1,1);
     tcount=0;
     for k = 1:2:(2*numel(ts))
@@ -497,10 +497,10 @@ numsec=length(g1data.section);
         apdnames{k}=['APD',num2str(ts(tcount))];
         apdnames{k+1}=['APD',num2str(ts(tcount)),'_Stdev'];
     end
-    acttimss=str2double(get(handles.actims,'String'));
+    acttimss=str2num(get(handles.actims,'String'));
 
 %some values from elecromap
-numsec=numsec;
+numsec;
 Section=[1:numsec]';
 Cycle_Length=[g1data.avgCL(2,1:numsec)]';
 
@@ -510,7 +510,7 @@ vouts=zeros(numsec,1);
 %wholetable for angular dists
 wholetable=zeros(721,numsec+1);
 wholetable(:,1)=(-360:1:360);
-binsize=str2double(get(handles.binsize,'String'))
+binsize=str2num(get(handles.binsize,'String'))
 360/binsize;
 length(binsize/2:binsize:360-binsize/2);
 wholetablemulti=zeros(360/binsize,numsec+1);
@@ -547,11 +547,11 @@ for j=1:numsec
 waitbar(j/numsec,wb,['Producing whole file section analysis: section ',num2str(j)]);
 %% Store each peak into array
 
-before=str2double(get(g1data.beforeGUI,'String'));
-after=str2double(get(g1data.afterGUI,'String'));
+before=str2num(get(g1data.beforeGUI,'String'));
+after=str2num(get(g1data.afterGUI,'String'));
 % 
 % exposure = time(2); % looks at the time to the first frame this is roughly the exposure
-exposure=1/str2double(get(g1data.framerate,'String')); 
+exposure=1/str2num(get(g1data.framerate,'String')); 
 before = round(before/exposure) %1000 because we are dealing with ms
  after = round(after/exposure);
 section_choice = j;
@@ -614,10 +614,10 @@ handles.averageBeat = uint16(averageBeat);
 
    %get APDs %apdvals( APD1;ST_DEV1;APD2;ST_DEV2 etc.. with rows being sections) 
     for i=1:length(ts)
-        [apdmap,apdvals(j,(2*i-1)),~,apdvals(j,2*i)]=mapsbaby(get(g1data.aptime1,'Value'),str2double(get(g1data.framerate,'String')),ts(i),g1data.I,g1data.images,handles.averageBeat,g1data.outlier,str2double(get(g1data.cmin,'String')),str2double(get(g1data.cmax,'String')),get(g1data.tfilt,'Value'),str2double(get(g1data.beforeGUI,'String')),get(g1data.apdbl,'Value'),str2double(get(g1data.apdblnum,'String')));
+        [apdmap,apdvals(j,(2*i-1)),~,apdvals(j,2*i)]=mapsbaby(get(g1data.aptime1,'Value'),str2num(get(g1data.framerate,'String')),ts(i),g1data.I,g1data.images,handles.averageBeat,g1data.outlier,str2num(get(g1data.cmin,'String')),str2num(get(g1data.cmax,'String')),get(g1data.tfilt,'Value'),str2num(get(g1data.beforeGUI,'String')),get(g1data.apdbl,'Value'),str2num(get(g1data.apdblnum,'String')));
         APDmap(:,:,j)=apdmap;
     end
-    
+
     
     if saveopt == 2
        for i = 1:handles.apdpointcount
@@ -634,7 +634,7 @@ handles.averageBeat = uint16(averageBeat);
            roiapds=[];
            anopt=2;
            if anopt == 1
-           [apd1,tau1,di1,ttp1,maxu1]=segapd(opt1,opt2,opt3,opt4,opt5,handles.av_sig(i,:),str2double(get(g1data.framerate,'String')),f,str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.afterGUI,'String')),get(g1data.tfilt,'Value'),ts(1),get(g1data.aptime1,'Value'),get(g1data.apdbl,'Value'),str2double(get(g1data.apdblnum,'String')),str2double(get(g1data.taustart,'String')),str2double(get(g1data.taufinish,'String')));    
+           [apd1,tau1,di1,ttp1,maxu1]=segapd(opt1,opt2,opt3,opt4,opt5,handles.av_sig(i,:),str2num(get(g1data.framerate,'String')),f,str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.afterGUI,'String')),get(g1data.tfilt,'Value'),ts(1),get(g1data.aptime1,'Value'),get(g1data.apdbl,'Value'),str2num(get(g1data.apdblnum,'String')),str2num(get(g1data.taustart,'String')),str2num(get(g1data.taufinish,'String')));    
            APDROI(j,i)=apd1;tauROI(j,i)=tau1;DIROI(j,i)=di1;ttpROI(j,i)=ttp1;maxuROI(j,i)=maxu1;
            end  
            if anopt == 2
@@ -651,13 +651,13 @@ handles.averageBeat = uint16(averageBeat);
      end
 
     if saveopt == 6
-       [actmap]=activationmapoff(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velalgo,'Value'),str2double(get(g1data.beforeGUI,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String')),str2double(get(g1data.t,'String')),[]); 
+       [actmap]=activationmapoff(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velalgo,'Value'),str2num(get(g1data.beforeGUI,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String')),str2num(get(g1data.t,'String')),[]); 
        tim=actmap(actmap>0);
        tim=tim-min(tim);
        allpts=numel(tim);
        xbins=0:0.01:max(tim);
        tissueact=100*cumsum(hist(tim,xbins))/allpts;
-       actmaxes=str2double(get(handles.actims,'String'));
+       actmaxes=str2num(get(handles.actims,'String'));
        actmin=0;
 
 for k=1:numel(actmaxes)
@@ -697,12 +697,12 @@ T=table(Section,Cycle_Length,Amax,Amaxdiff);
     if saveopt == 7
         try
 %        [handles.map,~,~,handles.act_t,~,~,~,~,~,~,handles.vout,handles.quivers_Xout,handles.quivers_Yout,handles.quivers_vxout,handles.quivers_vyout,~,~,~,handles.repolmap,handles.repolact_t,~,~]...
-%     =cvmap(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,1,str2double(get(g1data.minvel,'String')),str2double(get(g1data.maxvel,'String')),get(g1data.velalgo,'Value'),...
-%     str2double(get(g1data.MINt,'String')),str2double(get(g1data.MAXt,'String')),str2double(get(g1data.winsize,'String')),str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.wint,'String')),1,str2double(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String'))); 
+%     =cvmap(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,1,str2num(get(g1data.minvel,'String')),str2num(get(g1data.maxvel,'String')),get(g1data.velalgo,'Value'),...
+%     str2num(get(g1data.MINt,'String')),str2num(get(g1data.MAXt,'String')),str2num(get(g1data.winsize,'String')),str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.wint,'String')),1,str2num(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String'))); 
        
-[actmap,aoff]=activationmapoff(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velalgo,'Value'),str2double(get(g1data.beforeGUI,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String')),str2double(get(g1data.t,'String')),[]); 
+[actmap,aoff]=activationmapoff(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velalgo,'Value'),str2num(get(g1data.beforeGUI,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String')),str2num(get(g1data.t,'String')),[]); 
        tim=actmap(actmap>0);
-[repolmap]=activationmapoff(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,5,str2double(get(g1data.beforeGUI,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String')),str2double(get(g1data.t,'String')),aoff); 
+[repolmap]=activationmapoff(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,5,str2num(get(g1data.beforeGUI,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String')),str2num(get(g1data.t,'String')),aoff); 
        rtim=repolmap(repolmap>0);
 tim;
 repolmin=min(tim); %save for repol calcs
@@ -793,8 +793,8 @@ end
        T=[T,aptable];
        end
     [actmap,~,~,act_t,~,~,~,~,~,~,vout,~,~,~,~, cvonedevs(j)]=...
-    cvmap(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2double(get(handles.minvel,'String')),str2double(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
-          str2double(get(handles.mint,'String')),str2double(get(handles.maxt,'String')),str2double(get(handles.winsize,'String')),str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.wint,'String')),0,str2double(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String')));
+    cvmap(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2num(get(handles.minvel,'String')),str2num(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
+          str2num(get(handles.mint,'String')),str2num(get(handles.maxt,'String')),str2num(get(handles.winsize,'String')),str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.wint,'String')),0,str2num(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String')));
     Conduction_Velocity1(j)=mean(vout);
     CV1=table(Conduction_Velocity1);
     cv_onedev=table(cvonedevs)
@@ -807,7 +807,7 @@ allpts=numel(tim);
 xbins=0:0.01:max(tim);
 tissueact=100*cumsum(hist(tim,xbins))/allpts;
 
-actmax=str2double(get(handles.actims,'String'));
+actmax=str2num(get(handles.actims,'String'));
 actmin=0;
 
 Imax = find(tissueact > actmax);
@@ -854,8 +854,8 @@ end
         quiverv=[]
         vangle=[]
     [actmap,~,~,~,~,~,~,~,~,~,handles.vout,handles.quivers_Xout,handles.quivers_Yout,handles.quivers_vxout,handles.quivers_vyout]...
-    =cvmap(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2double(get(handles.minvel,'String')),str2double(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
-     str2double(get(handles.mint,'String')),str2double(get(handles.maxt,'String')),str2double(get(handles.winsize,'String')),str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.wint,'String')),0,str2double(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String'))); 
+    =cvmap(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2num(get(handles.minvel,'String')),str2num(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
+     str2num(get(handles.mint,'String')),str2num(get(handles.maxt,'String')),str2num(get(handles.winsize,'String')),str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.wint,'String')),0,str2num(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String'))); 
 
     quiverv=[handles.quivers_vxout, handles.quivers_vyout,handles.vout,handles.quivers_Xout,handles.quivers_Yout];
 for i =1:length(handles.quivers_vxout)
@@ -867,7 +867,7 @@ for i =1:length(handles.quivers_vxout)
 end
 vangle=vangle'
 quiverv=[quiverv,vangle];
-binsize=str2double(get(handles.binsize,'String'));
+binsize=str2num(get(handles.binsize,'String'));
 hva=hist(vangle,[binsize/2:binsize:360-binsize/2]);
 anglevs=zeros(1,length(hva));
 for i =1:length(handles.quivers_vxout)
@@ -892,8 +892,8 @@ APD=apdvals
         quiverv=[]
         vangle=[]
     [actmap,~,~,~,~,~,~,~,~,~,handles.vout,handles.quivers_Xout,handles.quivers_Yout,handles.quivers_vxout,handles.quivers_vyout]...
-    =cvmap(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2double(get(handles.minvel,'String')),str2double(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
-     str2double(get(handles.mint,'String')),str2double(get(handles.maxt,'String')),str2double(get(handles.winsize,'String')),str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.wint,'String')),0,str2double(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String'))); 
+    =cvmap(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2num(get(handles.minvel,'String')),str2num(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
+     str2num(get(handles.mint,'String')),str2num(get(handles.maxt,'String')),str2num(get(handles.winsize,'String')),str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.wint,'String')),0,str2num(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String'))); 
 
     quiverv=[handles.quivers_vxout, handles.quivers_vyout,handles.vout,handles.quivers_Xout,handles.quivers_Yout];
 for i =1:length(handles.quivers_vxout)
@@ -905,7 +905,7 @@ for i =1:length(handles.quivers_vxout)
 end
 vangle=vangle'
 quiverv=[quiverv,vangle];
-binsize=str2double(get(handles.binsize,'String'));
+binsize=str2num(get(handles.binsize,'String'));
 hva=hist(vangle,[binsize/2:binsize:360-binsize/2]);
 anglevs=zeros(1,length(hva));
 for i =1:length(handles.quivers_vxout)
@@ -923,19 +923,19 @@ writetable(T,file,'Delimiter',',','WriteVariableNames',false);
     %% Single Manual
 if cvopt == 4
     [map,~,~,act_t,~,~,~,~,~,~,vout,~,~,~,~, cvonedevs(j)]=...
-    cvmap(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2double(get(handles.minvel,'String')),str2double(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
-          str2double(get(handles.mint,'String')),str2double(get(handles.maxt,'String')),str2double(get(handles.winsize,'String')),str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.wint,'String')),0,str2double(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String')));
+    cvmap(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2num(get(handles.minvel,'String')),str2num(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
+          str2num(get(handles.mint,'String')),str2num(get(handles.maxt,'String')),str2num(get(handles.winsize,'String')),str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.wint,'String')),0,str2num(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String')));
 
 time_A=map(handles.pointA(2),handles.pointA(1));
 time_B=map(handles.pointB(2),handles.pointB(1)); %times in ms
-dist1=sqrt((handles.pointA(2)-handles.pointB(2))^2+(handles.pointA(1)-handles.pointB(1))^2)*str2double(get(g1data.pixelsize,'String')) %distance in um
+dist1=sqrt((handles.pointA(2)-handles.pointB(2))^2+(handles.pointA(1)-handles.pointB(1))^2)*str2num(get(g1data.pixelsize,'String')) %distance in um
 speed1=dist1*0.0001/(time_B-time_A)*1000; %speed in cm/s
 speed1=sqrt(speed1*speed1)
 time1=sqrt((time_B-time_A)^2) 
 
 Conduction_Velocity1(j)=speed1
 time_C=map(handles.pointC(2),handles.pointC(1)); %times in ms
-dist2=sqrt((handles.pointA(2)-handles.pointC(2))^2+(handles.pointC(1)-handles.pointC(1))^2)*str2double(get(g1data.pixelsize,'String')) %distance in um
+dist2=sqrt((handles.pointA(2)-handles.pointC(2))^2+(handles.pointC(1)-handles.pointC(1))^2)*str2num(get(g1data.pixelsize,'String')) %distance in um
 speed2=dist2*0.0001/(time_C-time_A)*1000; %speed in cm/s
 speed2=sqrt(speed2*speed2);
 time2=sqrt((time_C-time_A)^2); 
@@ -948,14 +948,14 @@ end
 
 %% single auto
 if cvopt == 5
-    veldistance=str2double(get(handles.veldistance,'String'));
-veldistancepix=round(veldistance*10000/(str2double(get(g1data.pixelsize,'String'))));
+    veldistance=str2num(get(handles.veldistance,'String'));
+veldistancepix=round(veldistance*10000/(str2num(get(g1data.pixelsize,'String'))));
 
 rrow=handles.rrow;
 rcol=handles.rcol;
 [map,~,~,act_t,~,~,~,~,~,~,vout,~,~,~,~, cvonedevs(j)]=...
-    cvmap(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2double(get(handles.minvel,'String')),str2double(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
-          str2double(get(handles.mint,'String')),str2double(get(handles.maxt,'String')),str2double(get(handles.winsize,'String')),str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.wint,'String')),0,str2double(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String')));
+    cvmap(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2num(get(handles.minvel,'String')),str2num(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
+          str2num(get(handles.mint,'String')),str2num(get(handles.maxt,'String')),str2num(get(handles.winsize,'String')),str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.wint,'String')),0,str2num(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String')));
 th = 0:pi/180:2*pi;
 xunit = veldistancepix * cos(th) + rcol;
 yunit = veldistancepix * sin(th) + rrow;
@@ -984,7 +984,7 @@ for i =1:numel(xunit)
         mat(count,1)=p1(1)-p2(1); 
         mat(count,2)=p1(2)-p2(2);
         mat(count,3)=tim; %time diffrence 
-        mat(count,4)=(dc*0.0001*(str2double(get(g1data.pixelsize,'String'))))/tim*1000; %speed in cm/s
+        mat(count,4)=(dc*0.0001*(str2num(get(g1data.pixelsize,'String'))))/tim*1000; %speed in cm/s
         mat(count,5)=th(i)*(180/pi);
         mat(count,6)=dc; %pixel distance
         xco=xcn;
@@ -1053,14 +1053,14 @@ end
    %% Single Dist
 
 if cvopt == 6
-veldistance=str2double(get(handles.veldistance,'String'));
-veldistancepix=round(veldistance*10000/(str2double(get(g1data.pixelsize,'String'))));
+veldistance=str2num(get(handles.veldistance,'String'));
+veldistancepix=round(veldistance*10000/(str2num(get(g1data.pixelsize,'String'))));
 
 rrow=handles.rrow;
 rcol=handles.rcol;
 [map,~,~,act_t,~,~,~,~,~,~,vout,~,~,~,~, cvonedevs(j)]=...
-    cvmap(str2double(get(g1data.pixelsize,'String')),str2double(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2double(get(handles.minvel,'String')),str2double(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
-          str2double(get(handles.mint,'String')),str2double(get(handles.maxt,'String')),str2double(get(handles.winsize,'String')),str2double(get(g1data.beforeGUI,'String')),str2double(get(g1data.wint,'String')),0,str2double(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2double(get(g1data.splineN,'String')));
+    cvmap(str2num(get(g1data.pixelsize,'String')),str2num(get(g1data.framerate,'String')),handles.cvimages,g1data.mask,get(g1data.velout,'Value'),str2num(get(handles.minvel,'String')),str2num(get(handles.maxvel,'String')),get(g1data.velalgo,'Value'),...
+          str2num(get(handles.mint,'String')),str2num(get(handles.maxt,'String')),str2num(get(handles.winsize,'String')),str2num(get(g1data.beforeGUI,'String')),str2num(get(g1data.wint,'String')),0,str2num(get(g1data.t,'String')),get(g1data.tfilt,'Value'),get(g1data.usespline,'Value'),str2num(get(g1data.splineN,'String')));
 th = 0:pi/180:2*pi;
 xunit = veldistancepix * cos(th) + rcol;
 yunit = veldistancepix * sin(th) + rrow;
@@ -1089,7 +1089,7 @@ for i =1:numel(xunit)
         mat(count,1)=p1(1)-p2(1); 
         mat(count,2)=p1(2)-p2(2);
         mat(count,3)=tim; %time diffrence 
-        mat(count,4)=(dc*0.0001*(str2double(get(g1data.pixelsize,'String'))))/tim*1000; %speed in cm/s
+        mat(count,4)=(dc*0.0001*(str2num(get(g1data.pixelsize,'String'))))/tim*1000; %speed in cm/s
         mat(count,5)=th(i)*(180/pi);
         mat(count,6)=dc; %pixel distance
         xco=xcn;
@@ -1204,7 +1204,7 @@ end
             ROIsignal(:,s)= ROIsignal(:,s)./max( ROIsignal(:,s));
             end
         end
-        time=[1:length(ROIsignal(:,1))].*(1/str2double(get(g1data.framerate,'String')));
+        time=[1:length(ROIsignal(:,1))].*(1/str2num(get(g1data.framerate,'String')));
         time=time';
         sigfilename=[b,'_signal',ext];
         sigfile=[pathname,sigfilename];
@@ -1249,8 +1249,8 @@ if get(g1data.isoopt,'Value') == 1
 mini=0;
 maxi=max(max(amap));
 elseif get(g1data.isoopt,'Value') == 2
-mini=str2double(get(g1data.isomin,'String'));
-maxi=str2double(get(g1data.isomax,'String'));
+mini=str2num(get(g1data.isomin,'String'));
+maxi=str2num(get(g1data.isomax,'String'));
 end
 imshow(amap, [0 maxi], 'InitialMagnification', 800,'colormap',jetcolormap),
 caxis([mini maxi]);
@@ -1267,8 +1267,8 @@ yLimits = get(handles.axes1, 'ylim');
 
 if (handles.curX > min(xLimits) && handles.curX < max(xLimits) && handles.curY > min(yLimits) && handles.curY < max(yLimits))
 
-veldistance=str2double(get(handles.veldistance,'String'));
-veldistancepix=round(veldistance*10000/(str2double(get(g1data.pixelsize,'String'))));
+veldistance=str2num(get(handles.veldistance,'String'));
+veldistancepix=round(veldistance*10000/(str2num(get(g1data.pixelsize,'String'))));
 handles.rrow=floor(handles.curY);
 handles.rcol=floor(handles.curX);
 rcol=handles.rcol;
@@ -1293,8 +1293,8 @@ if get(g1data.isoopt,'Value') == 1
 mini=0;
 maxi=max(max(amap));
 elseif get(g1data.isoopt,'Value') == 2
-mini=str2double(get(g1data.isomin,'String'));
-maxi=str2double(get(g1data.isomax,'String'));
+mini=str2num(get(g1data.isomin,'String'));
+maxi=str2num(get(g1data.isomax,'String'));
 end
 imshow(amap, [0 maxi], 'InitialMagnification', 800,'colormap',jetcolormap),
 caxis([mini maxi]);
@@ -1384,7 +1384,7 @@ handles.curY = cursorPoint(1,2);
 xLimits = get(handles.axes1, 'xlim');
 yLimits = get(handles.axes1, 'ylim');
 shapeopt=get(handles.roishape,'Value');
-sizeopt=str2double(get(handles.roisize,'String'));
+sizeopt=str2num(get(handles.roisize,'String'));
     set(handles.removepoints,'Visible','off')
     set(handles.removerois,'Visible','on')
     axes(handles.axes1)
@@ -1540,7 +1540,7 @@ function roisize_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of roisize as text
-%        str2double(get(hObject,'String')) returns contents of roisize as a double
+%        str2num(get(hObject,'String')) returns contents of roisize as a double
 
 
 % --- Executes during object creation, after setting all properties.
