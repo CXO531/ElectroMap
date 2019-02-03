@@ -1974,9 +1974,9 @@ handles.errCV=[onedevcv,SEcv,varicv,((CVp(3)-CVp(1))/CVp(2))];
 
 guidata(hObject, handles);
 
-rdata(1,1)=meanapd;rdata(1,2)=handles.err(1);rdata(1,3)=handles.err(2);rdata(1,4)=handles.err(3);rdata(1,5)=handles.err(4);
+rdata(1,1)=mean(alll);rdata(1,2)=handles.err(1);rdata(1,3)=handles.err(2);rdata(1,4)=handles.err(3);rdata(1,5)=handles.err(4);
 rdata(2,1)=mean(vout);rdata(2,2)=handles.errCV(1);rdata(2,3)=handles.errCV(2);rdata(2,4)=handles.errCV(3);rdata(2,5)=handles.errCV(4);
-
+handles.rdata=rdata;
 set(handles.rtable,'data',handles.rdata);
 
 %activation time
@@ -2192,7 +2192,7 @@ handles.errCV=[onedevCV,SECV,varCV,((CVp(3)-CVp(1))/CVp(2))];
 
 
 rdata=zeros(4,4);
-rdata(1,1)=meanapd;rdata(1,2)=handles.err(1);rdata(1,3)=handles.err(2);rdata(1,4)=handles.err(3);rdata(1,5)=handles.err(4);
+rdata(1,1)=mean(alll);rdata(1,2)=handles.err(1);rdata(1,3)=handles.err(2);rdata(1,4)=handles.err(3);rdata(1,5)=handles.err(4);
 rdata(2,1)=mean(vout);rdata(2,2)=handles.errCV(1);rdata(2,3)=handles.errCV(2);rdata(2,4)=handles.errCV(3);rdata(2,5)=handles.errCV(4);
 
 [fmap]=fluo_map(str2double(get(handles.framerate,'String')),handles.I,handles.images,get(handles.tfilt,'Value'),handles.averageBeat);
@@ -2954,15 +2954,16 @@ set(handles.actquote, 'String', [num2str(timdiff),' ms']);
 function t_Callback(hObject, eventdata, ~)
 handles = guidata(hObject);
 t=str2double(get(handles.t,'String'));
-[apmap,meanapd,~,onedev,var,SE]=mapsbaby(get(handles.aptime1,'Value'),str2double(get(handles.framerate,'String')),t,handles.I,handles.images,handles.averageBeat,handles.outlier,str2double(get(handles.cmin,'String')),str2double(get(handles.cmax,'String')),get(handles.tfilt,'Value'),str2double(get(handles.beforeGUI,'String')),get(handles.apdbl,'Value'),str2double(get(handles.apdblnum,'String')),handles.medifilt);
-alll=apmap(apmap>0);
+[apmap,meanapd,alll,onedev,var,SE]=mapsbaby(get(handles.aptime1,'Value'),str2double(get(handles.framerate,'String')),t,handles.I,handles.images,handles.averageBeat,handles.outlier,str2double(get(handles.cmin,'String')),str2double(get(handles.cmax,'String')),get(handles.tfilt,'Value'),str2double(get(handles.beforeGUI,'String')),get(handles.apdbl,'Value'),str2double(get(handles.apdblnum,'String')),handles.medifilt);
+%alll=apmap(apmap>0);
 APp=prctile(alll,[5,50,95]);
 handles.err=[onedev,SE,var,((APp(3)-APp(1))/APp(2))];
 %save AP,CV maps and vectors
 handles.apdmap=apmap;
 handles.apalll=alll;
 rdata=handles.rdata;
-rdata(1,1)=meanapd;rdata(1,2)=handles.err(1);rdata(1,3)=handles.err(2);rdata(1,4)=handles.err(3);rdata(1,5)=handles.err(4);
+rdata(1,1)=mean(alll);rdata(1,2)=handles.err(1);rdata(1,3)=handles.err(2);rdata(1,4)=handles.err(3);rdata(1,5)=handles.err(4);
+handles.rdata=rdata;
 guidata(hObject,handles)
 set(handles.rtable,'Data',rdata);
 disp('2977')
