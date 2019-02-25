@@ -32,9 +32,10 @@ count = 0;
 order =3;
 framesize =11;
 figcount = 0;
+
 for row=1:rows;
     for col=1:cols;
-     %try   
+     try   
 sdstart=[]; Tim = [];
 if mask(row,col) ~= 0  
 %try
@@ -102,10 +103,10 @@ peak=overalldoublepeak;
             baseline=min(peak);
             APD = (maxval-baseline)*(1-(t/100))+baseline;
             
-% 
-%             maxInd
-%             olocs(2)
-%             before
+ 
+             maxInd
+             olocs(2)
+             before
             checkSignal = peak(maxInd:olocs(2)-before);
             
             minInd = find(abs(checkSignal-APD)==min(abs(checkSignal-APD)));
@@ -182,6 +183,9 @@ DI(row,col)=(sdstart-Tim);
 else DI(row,col)=NaN;
 end
 
+             end
+catch error
+    DI(row,col)=NaN;
 % if row == 20 && col == 50
 % figure,
 % plot(overalldoublepeak)

@@ -30,12 +30,14 @@ if strcmp(remain, '.mat') == 1 %file is .mat file
     end
     images=cell2mat(v);
     images=double(images);
-    images=images-min(min(images));
-    images=images./max(max(images));
-    figure,
-    imshow(images(:,:,1),[])
+    frame1=images(:,:,1);
+    frame1=uint16(frame1);
+    images=images-min(images,[],3);
+    images=images./max(max(max(images)));
+    %plot(squeeze(images(25,40,:)),'b')
     images=images*((2^16)-1);
     images=uint16(images);
+    %plot(squeeze(images(25,40,:)),'r')
     dbs=16;
 end
 
@@ -70,7 +72,6 @@ end
 
 if fileisrsh == 2 %.mat
 num_images=size(images,3);
-frame1=images(:,:,1);
 if num_images > 2000
     fluoims = 2000;
 else
@@ -214,6 +215,8 @@ if quinnieopt == 1 %apply custom ROI
 end
 
 close(wb)
+class(im)
+class(mask)
 I=im.*mask;
 [boundaries] = bwboundaries(mask);
 

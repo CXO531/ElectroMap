@@ -301,15 +301,15 @@ order =3;
 framesize =11;
 
 
-signalav = imcomplement(squeeze((avbeat(row,col,:))));
-            signalav = (double(signalav));
-            
-           %signalav = sgolayfilt(signalav, order,framesize);
-           signalav=signalav-min(signalav);
-            if normalise == 1
-                signalav=signalav./max(signalav);
-            end
-            % Calculate APD
+% signalav = imcomplement(squeeze((avbeat(row,col,:))));
+%             signalav = (double(signalav));
+%             
+%            %signalav = sgolayfilt(signalav, order,framesize);
+%            signalav=signalav-min(signalav);
+%             if normalise == 1
+%                 signalav=signalav./max(signalav);
+%             end
+%             % Calculate APD
             
             [maxi, maxInd] = max(signalav);
             checkSignal = signalav(maxInd:end); %checkSignal(26)=190;

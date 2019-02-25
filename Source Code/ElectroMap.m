@@ -119,7 +119,7 @@ handles.isZoomed=0;
 
 
 
-handles.fmin=4;handles.fmax=10;handles.fbin=0.05;handles.dfwin=0; %Frequency mapping defaults 
+handles.fmin=0.5;handles.fmax=10;handles.fbin=0.05;handles.dfwin=0; %Frequency mapping defaults 
 
 % Update handles structure
 guidata(hObject, handles);
@@ -821,7 +821,7 @@ guidata(hObject, handles);
 function listbox2_Callback(hObject, eventdata, ~)
 handles = guidata(hObject);
 axes(handles.axes2)
-handles.filming = 0;
+%handles.filming = 0;
 exposure=1/str2double(get(handles.framerate,'String'));
 handles.averagestime=(0:1:(length(handles.averages(1,:))-1))*exposure;
 plot(handles.averagestime, handles.averages,'k'),
@@ -1434,7 +1434,7 @@ dfsp=prctile(dfs,[5,50,95]);
 handles.rdata(4,1)=mean(dfs);handles.rdata(4,2)=std(dfs);handles.rdata(4,3)=std(dfs)/numel(dfs);handles.rdata(4,4)=std(dfs)*std(dfs);handles.rdata(4,4)=std(dfs)*std(dfs);handles.rdata(4,5)=((dfsp(3)-dfsp(1))/dfsp(2));
 rownames=get(handles.rtable,'RowName');
 rownames{4}='DF';
-set(handles.meanchange,'String',rownames{4});
+set(handles.rtable,'RowName',rownames);
 set(handles.rtable,'data',handles.rdata);
 end
 if choice == 6
@@ -1698,7 +1698,7 @@ handles.holdmap=map;
 handles.holdcvmap=CVmap;
 drawnow()
 guidata(hObject, handles);
-
+drawnow()
 
 % Hints: contents = cellstr(get(hObject,'String')) returns apdvaluechoice contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from apdvaluechoice
@@ -2047,7 +2047,7 @@ function producemaps_Callback(hObject, eventdata, ~)
 % handles    structure with handles and user data (see GUIDATA)
 
 handles = guidata(hObject);
-handles.filming=0;
+%handles.filming=0;
 %% Store each peak into array
 before=str2double(get(handles.beforeGUI,'String'));
 after=str2double(get(handles.afterGUI,'String'));
@@ -2062,6 +2062,7 @@ end
 
 handles.filming
 if handles.filming == 1
+handles.filmcount=handles.filmcount+1;
 section_choice=handles.filmcount;
 section_choice
 end
@@ -2283,6 +2284,7 @@ axes(handles.mapaxes);
 
 % Make MAPS!!!!!
 Mapchoice_Callback(hObject, eventdata, handles)
+drawnow()
 guidata(hObject, handles);
 % --- Executes on selection change in threshopt.
 function threshopt_Callback(hObject, ~, handles)
@@ -2592,25 +2594,28 @@ file=[pathname,filename];
 %         if isdepolyed == 0
 %         cd(pathname)
 %         end
+handles.filming = 1;
 numsec=length(handles.section);
 vidobj = VideoWriter(file);
 vidobj.FrameRate=1;
 open(vidobj);
 set(gca,'nextplot','replacechildren');
-handles.filming = 1;
-wb=waitbar(0.1,'Producing video file','WindowStyle', 'modal');
+
+guidata(hObject, handles);
+%wb=waitbar(0.1,'Producing video file','WindowStyle', 'modal');
 for k=1:numsec
 handles.filmcount = k;
+guidata(hObject,handles);
 producemaps_Callback(hObject, eventdata, handles)
 handles = guidata(hObject);
 axes(handles.mapaxes);
 currFrame = getframe;
 writeVideo(vidobj,currFrame);
 0.1+0.9*(k/numsec)
-waitbar((0.1+0.9*(k/numsec)),wb);
+%waitbar((0.1+0.9*(k/numsec)),wb);
 end
 close(vidobj);
-delete(wb)
+%delete(wb)
 set(handles.listbox2,'Value',numsec)
 handles.filming = 0;
 case 'Image'
@@ -2636,6 +2641,7 @@ set(gca,'OuterPosition',[i/numsec-0.2 i/numsec-0.2 i/numsec i/numsec])
 guidata(hObject, handles);
 end
 handles.filming=0
+guidata(hObject, handles);
 end
 
 

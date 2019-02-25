@@ -19,7 +19,8 @@ insig=smooth(insig);
 %find peaks
 maxfluo=max(signal);
 newpeakheight=maxfluo*peakheight;
-
+avgCL=[];
+numofpeaksoverall=[];
 %make start up to before and end up to after zero so no peaks can be found here
 signal(1:before)=ones(1,before)*signal(before+1);
 signal(end-after+1:end)=ones(1,after)*signal(end-after);
@@ -35,7 +36,7 @@ CL(:,1)=locs(:);
 CLdiff=zeros(1,(length(CL)-1));
 %Calculate CLs
 if length(locs) >= 2
-CL(1,2)=locs(2)-locs(1); %first peak as no refrence before, so use next peak
+CL(1,2)=locs(2)-locs(1); %first peak has no refrence before, so use next peak
 end
 for i=2:(length(locs))
     CL(i,2)=locs(i)-locs(i-1);
@@ -50,7 +51,8 @@ for i=2:(length(locs)-2)
         end
     end
 end
-
+% CLdiff
+% CL
 %Find diffrenet regions of constant CL , and position in signal.
 q1=[];k=1;j=0; q2=[]; q2locs=[];
 if isempty(locs) == 1 %no peaks
@@ -94,10 +96,13 @@ if length(locs) > 1
         pos=mean(find(q2(i,:)));
         %avgCL(1,i)=round(pos);
         avgCL(1,i)=(pos);
-        avgCL(2,i) = mean(nonzeros(q2(i,:)));
+        cl_1=nonzeros(q2(i,:));
+        if numel(cl_1)>1
+           cl_1=cl_1(2:end);
+        end
+        avgCL(2,i) = mean(cl_1);
     end
 end    
-
 %% check if first or last peak too close to end
 % if q2locs(1,1) < bframes
 %    q2locs=q2locs(:,2:end);

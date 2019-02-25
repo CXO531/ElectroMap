@@ -279,6 +279,11 @@ end
 onedev=std(alll);
 SE=onedev/sqrt(numel(alll));
 vari=var(alll);
+% 
+% min(alll)
+% max(alll)
+% pause(10)
+
 meann = mean(alll);
 
 

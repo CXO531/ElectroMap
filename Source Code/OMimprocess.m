@@ -11,10 +11,8 @@ if strcmp(remain, '.mat') == 1
     v=struct2cell(X);
     images=cell2mat(v);
     images=double(images);
-    images=images-min(min(images));
-    images=images./max(max(images));
-    figure,
-    imshow(images(:,:,1),[])
+    images=images-min(images,[],3);
+    images=images./max(max(max(images)));
     images=images*((2^16)-1);
     images=uint16(images);
     dbs=16;
@@ -44,7 +42,7 @@ wbcount=0;
 
 
 if fileisrsh == 0
-    images=zeros(rows,cols,num_images);
+images=zeros(rows,cols,num_images);
 preimages=zeros(rows,cols,num_images);
     TifLink = Tiff(fname, 'r');
 for j  = 1:num_images;  
@@ -101,7 +99,7 @@ if fileisrsh == 1
 averages  = imcomplement(averages);
 end
 
-if fileisrsh == 0;
+if fileisrsh == 0 || fileisrsh == 2;
 averages  = imcomplement(averages);
 end
 tav=averages-min(averages);
@@ -111,8 +109,12 @@ tav=averages-min(averages);
 if removef == 1
     disp('hi')
     pfind=figure
+    if inversion == 1
+        tav=imcomplement(tav);
+    end
+    tav=tav-min(tav)
     plot(tav)
-    [opks,olocs]=findpeaks(tav,'MINPEAKHEIGHT',max(tav)*0.75,'MINPEAKDISTANCE',3);
+    [opks,olocs]=findpeaks(tav,'MINPEAKHEIGHT',max(tav)*0.75,'MINPEAKDISTANCE',20);
     hold on
     plot(olocs,opks,'or')
     waitfor(pfind)

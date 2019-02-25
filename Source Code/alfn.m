@@ -40,6 +40,8 @@ for i = 1: length(Pks)
     length(Fluo);
     if locs(i)-before > 0 && locs(i)+after < numel(Fluo)
     signal=Fluo((locs(i)-before):(locs(i)+after));
+    else
+     signal=Fluo;
     end
     [sigPks(i), siglocs(i)] = max(signal);
     before_sig=signal(1:siglocs(i));

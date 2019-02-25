@@ -156,6 +156,8 @@ curX = cursorPoint(1,1);
 curY = cursorPoint(1,2);
 row=floor(curY);
 col=floor(curX);
+% row=41;
+% col=55;
 [rows,cols,num] = size(g1data.images(:,:,:));
 %row=30; col=30;
 xLimits = get(handles.image, 'xlim');
@@ -321,7 +323,8 @@ hold off
 else
 disp('Cursor is outside bounds of image.');
 end
-
+row
+col
 guidata(hObject, handles);
 
 
