@@ -195,8 +195,8 @@ if segchoice == 2 || segchoice == 3
                 avgCL(2,i) = mean(nonzeros(cld(i,:)));
             else
                 if i < length(q2locs)
-                    avgCL(2,i)= locs(i+1)-locs(i);
-                else avgCL(2,i)=avgCL(2,i-1);
+%                     avgCL(2,i)= locs(i+1)-locs(i);
+%                 else avgCL(2,i)=avgCL(2,i-1);
                 end %to deal with last peak
             end
         end

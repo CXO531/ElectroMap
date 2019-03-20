@@ -1,4 +1,4 @@
-function [num_images,rect,mask,im,I,boundaries,camopt,frame1,fluoim,rois] = OMimload(fname,cropchoice,quinnieopt,threshop,threshman,rect,inversion,camopt,fluo_opt,roinum,roisum)
+function [num_images,rect,mask,im,I,boundaries,camopt,frame1,fluoim,rois,n] = OMimload(fname,cropchoice,quinnieopt,threshop,threshman,rect,inversion,camopt,fluo_opt,roinum,roisum)
 % Function for taking raw image file and applying thersholding, final
 % output - regradless of input, will be uint16 mask. 
 % Chris O'Shea and Ting Yue Yu, University of Birmingham 
@@ -18,6 +18,7 @@ warning('off',id)
 [token,remain] = strtok(fname,'.');
 dbs=0;
 fileisrsh=0; %file is tiff stack 
+n=[];
 if strcmp(remain, '.mat') == 1 %file is .mat file 
     fileisrsh = 2;
     S=whos('-file',fname);
@@ -25,11 +26,24 @@ if strcmp(remain, '.mat') == 1 %file is .mat file
     X=load(fname);
     v=struct2cell(X);
     sv = size(v,1);
-    if sv > 1
-       errordlg('Multiple variables found in .MAT file!. Please edit file to contain only images variable')
-    end
+    if sv == 2
+     qn = questdlg('Which Dataset?', ...
+	'Which Dataset?', ...
+	'1','2','1');
+% Handle response
+switch qn
+    case '1'
+        n = 1;
+    case '2'
+        n = 2;
+end
+       images=v{n};
+       images=double(images);
+       % errordlg('Multiple variables found in .MAT file!. Please edit file to contain only images variable')
+    else
     images=cell2mat(v);
     images=double(images);
+    end
     frame1=images(:,:,1);
     frame1=uint16(frame1);
     images=images-min(images,[],3);
@@ -118,6 +132,8 @@ im = imcrop(im, rect);
 fluoim=imcrop(fluoim,rect);
 frame1=imcrop(frame1,rect);
 close(cropfigure)
+else
+    rect=[];
 end
 
 %square crop saved from before
@@ -219,4 +235,3 @@ class(im)
 class(mask)
 I=im.*mask;
 [boundaries] = bwboundaries(mask);
-

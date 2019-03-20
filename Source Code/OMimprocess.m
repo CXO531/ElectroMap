@@ -1,4 +1,4 @@
-function [preimages,images,averages,mask] = OMimprocess(fname,im,rect,num_images,cropchoice,mask,sfilt,sfiltsize,inversion,tfilt,removef,camopt,sfiltsigma,pbefore,pafter)
+function [preimages,images,averages,mask] = OMimprocess(fname,im,rect,num_images,cropchoice,mask,sfilt,sfiltsize,inversion,tfilt,removef,camopt,sfiltsigma,pbefore,pafter,n)
 %funtion for reading in and processimg all images in the tif stack/ rhs
 [rows cols] = size(im);
 [token,remain] = strtok(fname,'.');
@@ -9,8 +9,27 @@ if strcmp(remain, '.mat') == 1
     imvar=S.name;
     X=load(fname);
     v=struct2cell(X);
+    sv = size(v,1);
+    if sv == 2
+    if isempty(n)== 1
+          qn = questdlg('Which Dataset?', ...
+	'Which Dataset?', ...
+	'1','2','1');
+% Handle response
+switch qn
+    case '1'
+        n = 1;
+    case '2'
+        n = 2;
+end
+       end
+       images=v{n};
+       images=double(images);
+       % errordlg('Multiple variables found in .MAT file!. Please edit file to contain only images variable')
+    else
     images=cell2mat(v);
     images=double(images);
+    end
     images=images-min(images,[],3);
     images=images./max(max(max(images)));
     images=images*((2^16)-1);
@@ -78,7 +97,6 @@ for j  = 1:num_images;
     end
     if inversion == 0
        A=imcomplement(A);
-       A=A-min(A);
     end
     preimages(:,:,j)=(A);
     A = imfilter(A, h);

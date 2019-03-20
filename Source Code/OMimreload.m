@@ -194,7 +194,7 @@ end
 
 if quinnieopt == 1 %apply custom ROI
     BWpoly=uint16(BWpoly);
-    mask=mask.*BWpoly
+    mask=mask.*BWpoly;
 end
 
 if fluo_opt == 2

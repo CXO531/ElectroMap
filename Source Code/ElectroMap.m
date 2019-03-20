@@ -263,7 +263,7 @@ set(handles.B2B,'Enable','off')
 
 %% Load new image using OMimload function
 if tf == 0
-[num_images,handles.newrect,mask,im,handles.I,boundaries,handles.camopt,handles.frame1,handles.fluoim,handles.rois] = OMimload(handles.fname,cropchoice,quinnieopt,handles.threshop,handles.threshman,handles.rect,inversion,camopt,get(handles.imagedisp,'Value'),handles.roinum,handles.roisum);
+[num_images,handles.newrect,mask,im,handles.I,boundaries,handles.camopt,handles.frame1,handles.fluoim,handles.rois,handles.rhsn] = OMimload(handles.fname,cropchoice,quinnieopt,handles.threshop,handles.threshman,handles.rect,inversion,camopt,get(handles.imagedisp,'Value'),handles.roinum,handles.roisum);
 handles.mask=[];
 handles.mask=mask;
 handles.im=im; handles.num_images=num_images; handles.rect=handles.newrect;
@@ -285,20 +285,24 @@ switch choice
 case 'Yes'
 [rows,cols]=size(im);
 [rows2,cols2]=size(mask);
-if rows2>rows && cols2>cols
+
+
+if rows<=rows2
+    rows3=rows;
+else
+    rows3=rows2;
+end
+
+if cols<=cols2
+    cols3=cols;
+else
+    cols3=cols2;
+end
+
 newmask=zeros(rows,cols);
-for r=1:rows
-for c=1:cols
+for r=1:rows3
+for c=1:cols3
 newmask(r,c)=mask(r,c);
-end
-end
-end
-if rows>rows2 && cols>cols2
-newmask=zeros(rows,cols);
-for r=1:rows2
-for c=1:cols2
-newmask(r,c)=mask(r,c);
-end
 end
 end
 
@@ -321,7 +325,7 @@ end
 
 %% Rethreshold loaded image set 
 if tf == 1
-[num_images,handles.newrect,mask,im,handles.I,boundaries,handles.camopt,handles.frame1,handles.fluoim,handles.rois] = OMimreload(handles.fname,cropchoice,quinnieopt,handles.threshop,handles.threshman,handles.rect,inversion,camopt,get(handles.imagedisp,'Value'),handles.roinum,handles.roisum,handles.frame1,handles.num_images);
+[num_images,handles.newrect,mask,im,handles.I,boundaries,handles.camopt,handles.frame1,handles.fluoim,handles.rois,handles.rhsn] = OMimload(handles.fname,cropchoice,quinnieopt,handles.threshop,handles.threshman,handles.rect,inversion,camopt,get(handles.imagedisp,'Value'),handles.roinum,handles.roisum);;
 handles.mask=[];
 handles.mask=mask;
 handles.im=im; handles.num_images=num_images; handles.rect=handles.newrect;
@@ -469,7 +473,7 @@ if isempty(handles.rect) == 0
 handles.cropchoice = 1;
 end
 handles.averages=[];
-[handles.preimages,images,averages,mask] = OMimprocess(handles.fname,handles.im,handles.rect,handles.num_images,handles.cropchoice,handles.mask,sfilt,sfiltsize,inversion,tfilt,handles.frameremove,handles.camopt,str2double(get(handles.sfiltsigma,'String')),handles.pbefore,handles.pafter);
+[handles.preimages,images,averages,mask] = OMimprocess(handles.fname,handles.im,handles.rect,handles.num_images,handles.cropchoice,handles.mask,sfilt,sfiltsize,inversion,tfilt,handles.frameremove,handles.camopt,str2double(get(handles.sfiltsigma,'String')),handles.pbefore,handles.pafter,handles.rhsn);
 handles.waverages=averages;
 handles.images=images;
 handles.averages=averages;

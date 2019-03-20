@@ -159,6 +159,8 @@ if isempty(handles.row)==0
     axes(handles.phasedelay);
     hold on
     plot(x(1:i),y(1:i),'+','Color',handles.cm(k))
+         assignin('base','x',x)
+     assignin('base','y',y)
     axes(handles.phase)
     plot(1:length(a),a,'Color',handles.cm(k))
     end
@@ -320,6 +322,8 @@ x=squeeze(handles.xs(handles.row(handles.pointcount),handles.col(handles.pointco
      a=sgolayfilt(a,3,11)
     axes(handles.phasedelay);
      plot(x(1:i),y(1:i),'+','Color',handles.cm(handles.pointcount))
+     assignin('base','x',x)
+     assignin('base','y',y)
      axes(handles.phase);
      hold on
      plot(1:length(a),a,'Color',handles.cm(handles.pointcount))

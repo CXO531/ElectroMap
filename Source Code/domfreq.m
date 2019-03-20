@@ -67,6 +67,10 @@ for row = 1:rows
         [maxpower,maxind]=max(P1(min(ui):max(oi)));
         [~,xx]=find(P1==maxpower);
         xx=xx(1);
+        if row == 32 && col == 32
+          assignin('base','P1',P1)
+          assignin('base','f',f)
+        end
         freqmap(row,col)=f(xx);
         else
            freqmap(row,col)=NaN;
