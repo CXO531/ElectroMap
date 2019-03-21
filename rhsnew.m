@@ -29,7 +29,7 @@ k = strfind(fstr,'Data-File-List'); filestart=k+16;
 
 file_string=fstr(filestart:end);
 filelist={};
-[token,remain] = strtok(file_string,'.');
+[a,token,remain]=fileparts(filename);
 
 for i=1:100000
     str1=file_string;
