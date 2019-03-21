@@ -1,7 +1,7 @@
 function [preimages,images,averages,mask] = OMimprocess(fname,im,rect,num_images,cropchoice,mask,sfilt,sfiltsize,inversion,tfilt,removef,camopt,sfiltsigma,pbefore,pafter,n)
 %funtion for reading in and processimg all images in the tif stack/ rhs
 [rows cols] = size(im);
-[token,remain] = strtok(fname,'.');
+[qq,token,remain] = fileparts(fname);
 fileisrsh=0;
 if strcmp(remain, '.mat') == 1
     fileisrsh = 2;

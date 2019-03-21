@@ -716,7 +716,10 @@ hold on
 plot(handles.averagestime(handles.locs),handles.averages(handles.locs), 'or');
 before=round(str2double(get(handles.beforeGUI,'String'))/exposure);
 after=round(str2double(get(handles.afterGUI,'String'))/exposure);
-%if length(handles.locs) > 2
+if length(handles.locs) < 2
+ handles.q2locs=handles.locs;
+ handles.avgCL(2,1)=0;
+end
 for i = 1:length(handles.q2locs(:,1))
 c=mod(i,6);
 if c == 0

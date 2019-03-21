@@ -15,7 +15,7 @@ warning('off',id)
 id='MATLAB:imagesci:tiffmexutils:libtiffWarning';
 warning('off',id)
 %% Work out filetype. 0=tiff 2=mat
-[token,remain] = strtok(fname,'.');
+[qq,token,remain] = fileparts(fname);
 dbs=0;
 fileisrsh=0; %file is tiff stack 
 n=[];
