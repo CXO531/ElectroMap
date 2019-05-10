@@ -59,7 +59,14 @@ for row = 1:rows
             maxi=max(upstroke);
            %starttime
            a1=(t1*maxi)/100;
-           ind_above_1=find(upstroke>a1,1);
+           ind_above_1=find(upstroke>a1);
+           du=diff(ind_above_1);
+           duind=find(du>1,1,'last');
+           if isempty(duind) == 1
+               duind = 0
+           end
+           ind_above_1=(ind_above_1(duind+1));
+           length(upstroke);
            if ind_above_1 >1
            ind_below_1=ind_above_1-1;
            m1=(upstroke(ind_above_1)-upstroke(ind_below_1)); %don't need /x2-x1 as this is always 1
