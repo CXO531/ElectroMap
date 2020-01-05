@@ -1,0 +1,7 @@
+Updated version of software including optical wave similarity and dFdt mapping. See below for more details on methodology. 
+Setting are available from top menu. Setting dFdt level to 0 will map maximum dFdt. 
+Setting OWS threshold to zero will calculate OWS, setting to any other value will calculate regularity index. 
+
+dFdt - https://www.frontiersin.org/articles/10.3389/fphys.2019.01295/full
+
+OWS/RI - https://www.sciencedirect.com/science/article/pii/S0079610719302135
