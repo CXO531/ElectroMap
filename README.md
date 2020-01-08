@@ -3,6 +3,7 @@
 ElectroMap - optical and electrophysiological mapping software.
 
 5th Jan 2020 - 
+ONLY WORK WITH MATLAB 2019B CURRENTLY
 Updated version of software including optical wave similarity and dFdt mapping can be found in new folder 'Source Code - OWS and dFdt update'. .exe version of updated software will be once it has been fully tested. If any issues are found in new version, please contact C.O'Shea@bham.ac.uk.
 
 See below for more details on methodology. 
