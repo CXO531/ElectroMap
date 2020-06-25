@@ -182,11 +182,11 @@ if size(handles.amp_map,1) ~= size(handles.mask,1) || size(handles.amp_map,2) ~=
 end
 
 %medfiit maps
-for i =1:length(handles.amp_map(1,1,:))
-    handles.amp_map(:,:,i)=medfilt2(handles.amp_map(:,:,i));
-    handles.load_map(:,:,i)=medfilt2(handles.load_map(:,:,i));
-    handles.apd_map(:,:,i)=medfilt2(handles.apd_map(:,:,i));
-end
+%for i =1:length(handles.amp_map(1,1,:))
+%    handles.amp_map(:,:,i)=medfilt2(handles.amp_map(:,:,i));
+%    handles.load_map(:,:,i)=medfilt2(handles.load_map(:,:,i));
+%    handles.apd_map(:,:,i)=medfilt2(handles.apd_map(:,:,i));
+%end
 
 set(handles.slider1,'Max',length(handles.amp_map(1,1,:)));
 set(handles.slider1,'SliderStep',[1/(length(handles.amp_map(1,1,:))) 0.1]);
